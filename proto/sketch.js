@@ -1,6 +1,6 @@
-let benoit, benoit_run_r, benoit_run_l, benoit_jump;
-let natacha, natacha_run_r, natacha_run_l, natacha_jump;
-let mora, mora_run_r, mora_run_l, mora_jump;
+let benoit, benoit_run_r, benoit_run_l, benoit_jump, benoit_accueil;
+let natacha, natacha_run_r, natacha_run_l, natacha_jump, natacha_accueil;
+let guillaume, guillaume_run_r, guillaume_run_l, guillaume_jump, guillaume_accueil;
 let waste = [];
 let covid;
 let bg_ingame;
@@ -22,20 +22,23 @@ let gameEnded = false; // Indique si la partie est terminée
 
 function preload() {
 
+    benoit_accueil = loadImage("./asset/benoit-accueil.png");
     benoit = loadImage("./asset/benoit.png");
     benoit_run_r = loadImage("./asset/benoit_run-r.png");
     benoit_run_l = loadImage("./asset/benoit_run-l.png");
     benoit_jump = loadImage("./asset/benoit_jump.png");
 
+    natacha_accueil = loadImage("./asset/natacha-accueil.png");
     natacha = loadImage("./asset/natacha.png");
     natacha_run_r = loadImage("./asset/natacha_run-r.png");
     natacha_run_l = loadImage("./asset/natacha_run-l.png");
     natacha_jump = loadImage("./asset/natacha_jump.png");
 
-    mora = loadImage("./asset/natacha.png");
-    mora_run_r = loadImage("./asset/natacha_run-r.png");
-    mora_run_l = loadImage("./asset/natacha_run-l.png");
-    mora_jump = loadImage("./asset/natacha_jump.png");
+    guillaume_accueil = loadImage("./asset/guillaume-accueil.png");
+    guillaume = loadImage("./asset/guillaume.png");
+    guillaume_run_r = loadImage("./asset/guillaume_run-r.png");
+    guillaume_run_l = loadImage("./asset/guillaume_run-l.png");
+    guillaume_jump = loadImage("./asset/guillaume_jump.png");
 
   
   bg_ingame = loadImage("./asset/background_ingame.jpg");
@@ -86,9 +89,9 @@ let movingCharacters = []; // Liste des personnages traversant l'écran
 
 function setupMovingCharacters() {
   movingCharacters = [
-    { x: 0, y: 525, speed: random(2, 5), direction: 1, image: benoit_run_r },
-    { x: width, y: 525, speed: random(2, 5), direction: -1, image: natacha_run_l },
-    { x: -1000, y: 525, speed: random(2, 5), direction: 1, image: mora_run_r },
+    { x: 0, y: 525, speed: random(2, 5), direction: 1, image: benoit_accueil },
+    { x: width, y: 525, speed: random(2, 5), direction: -1, image: natacha_accueil },
+    { x: -1000, y: 525, speed: random(2, 5), direction: 1, image: guillaume_accueil },
   ];
 }
 
@@ -99,8 +102,9 @@ function showStartMenu() {
   fill(255, 255, 255);
   stroke(0);
   strokeWeight(5);
-  text('Welcome to the game!', 500, 100);
-  text('[Name]', 350, 200);
+  text('Welcome to the Cloudfall !', 600, 100);
+  textSize(24);
+  text('Digital Cleanup Day', 600, 150);
   textSize(36);
   text('Choose a mode to get started', width - 50, 100 );
 
@@ -109,7 +113,7 @@ function showStartMenu() {
   let animationOffset = sin(millis() / 200) * 5; // Animation de va-et-vient
   push();
   rotate(radians(-14));
-  text(`Best Clean Up: ${bestScore}  Mb !`, width / 2 - 180 , height/2  + animationOffset);
+  text(`Best Cleanup: ${bestScore}  Mb !`, width / 2 - 180 , height/2  + animationOffset);
   pop();
 
   // Afficher les boutons de sélection de mode de jeu
@@ -197,7 +201,7 @@ function displayResults() {
       { player: "Natacha", score: player2Score },
     ];
     if (mode === "three") {
-      scores.push({ player: "Frederic", score: player3Score });
+      scores.push({ player: "Guillaume", score: player3Score });
     }
 
     scores.sort((a, b) => b.score - a.score);
@@ -213,10 +217,10 @@ function displayResults() {
     textSize(48);
     text(`${winner.player} Wins!`, width / 2, height / 2 - 50);
     textSize(32);
-    text(`Clean Up: ${winner.score} Mb`, width / 2, height / 2 + 50);
+    text(`Cleanup: ${winner.score} Mb`, width / 2, height / 2 + 50);
 
   } else if (mode === "single") {
-    console.log("Clean Up:", player1Score, "Mb");
+    console.log("Cleanup:", player1Score, "Mb");
 
     // Dessiner un fond rectangulaire derrière le texte avec animation
     fill(0, 0, 0, 150); // Fond noir semi-transparent
@@ -228,7 +232,7 @@ function displayResults() {
     textSize(48);
     text(`Congratulations!`, width / 2, height / 2 - 50);
     textSize(32);
-    text(`Clean Up: ${player1Score}Mb`, width / 2, height / 2 + 20);
+    text(`Cleanup: ${player1Score}Mb`, width / 2, height / 2 + 20);
     text(`Best: ${bestScore}Mb`, width / 2, height / 2 + 70);
   }
 
@@ -459,7 +463,7 @@ class Player2 {
 
     push();
     translate(-25, -50);
-    image(this.currentImage, this.x, this.y, 121, 200);
+    image(this.currentImage, this.x, this.y, 160, 200);
     pop();
 
     // Instructions pour afficher les contrôles au début
@@ -519,7 +523,7 @@ class Player3 {
     this.gravity = 1;
     this.isJumping = false;
     this.yVelocity = 0;
-    this.currentImage = mora; // Image par défaut
+    this.currentImage = guillaume; // Image par défaut
   }
 
   show() {
@@ -531,7 +535,7 @@ class Player3 {
 
     push();
     translate(-25, -50);
-    image(this.currentImage, this.x, this.y, 121, 200);
+    image(this.currentImage, this.x, this.y, 127, 200);
     pop();
 
     // Instructions pour afficher les contrôles au début
@@ -549,37 +553,50 @@ class Player3 {
   }
 
   move() {
-    let targetX = mouseX - 25;
-    let direction = targetX - this.x;
-    if (direction > this.speed) {
-      this.x += this.speed;
-      this.currentImage = mora_run_r; // Image pour déplacement à droite
-    } else if (direction < -this.speed) {
-      this.x -= this.speed;
-      this.currentImage = mora_run_l; // Image pour déplacement à gauche
-    } else {
-      this.x = targetX;
+    let moving = false; // Indique si le joueur est en train de bouger
+
+    // Déplacement à gauche
+    if (mouseX < this.x - 25) {
+        this.x -= this.speed;
+        this.currentImage = guillaume_run_l; // Image pour déplacement à gauche
+        moving = true;
     }
 
+    // Déplacement à droite
+    if (mouseX > this.x + 25) {
+        this.x += this.speed;
+        this.currentImage = guillaume_run_r; // Image pour déplacement à droite
+        moving = true;
+    }
+
+    // Gestion du saut
     if (mouseIsPressed && !this.isJumping) {
-      this.isJumping = true;
-      this.yVelocity = this.jumpForce;
-      this.currentImage = mora_jump; // Image pour saut
+        this.isJumping = true;
+        this.yVelocity = this.jumpForce;
+        this.currentImage = guillaume_jump; // Image pour saut
     }
 
-    if (!mouseIsPressed && !this.isJumping) {
-      this.currentImage = mora; // Image par défaut (immobile)
-    }
-
+    // Mise à jour de la position verticale
     this.y += this.yVelocity;
     this.yVelocity += this.gravity;
+
+    // Vérifier si le joueur touche le sol
     if (this.y >= 550) {
-      this.y = 550;
-      this.isJumping = false;
-      this.yVelocity = 0;
+        this.y = 550;
+        this.isJumping = false;
+        this.yVelocity = 0;
     }
+
+    // Image par défaut (immobile) si aucune action n'est en cours
+    if (!moving && !this.isJumping) {
+        this.currentImage = guillaume; // Image par défaut
+    }
+
+    // Contraintes pour rester dans les limites de l'écran
     this.x = constrain(this.x, 0, width - 50);
-  }
+}
+
+
 }
 
 function handleFallingObjects() {
@@ -647,7 +664,7 @@ function displayScores() {
   }
   if (mode === "three") {
     fill(0, 102, 204);
-    text(`Frederic: ${player3Score}Mb`, 100, 110);
+    text(`Guillaume: ${player3Score}Mb`, 100, 110);
 
     if (millis() < stunTimers.J3) {
       fill(255, 215, 0);
