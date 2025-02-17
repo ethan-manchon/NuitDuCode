@@ -7,7 +7,7 @@ Ce projet est développé avec **p5.js**.
 
 1. **Cloner le dépôt :**
    ```sh
-   git clone https://github.com/utilisateur/nuit-du-code.git
+   git clone https://github.com/ethan-manchon/NuitDuCode.git
 
 🎮 Objectif du Jeu
 Le jeu vise à sensibiliser les joueurs à l'impact des déchets électriques et à promouvoir leur recyclage.
